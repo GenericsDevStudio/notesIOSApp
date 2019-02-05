@@ -10,6 +10,8 @@
 		522221E322022C4700753E8B /* NotesApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 522221E122022C4700753E8B /* NotesApp.xcdatamodeld */; };
 		522221E622022DAF00753E8B /* User+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 522221E422022DAF00753E8B /* User+CoreDataClass.swift */; };
 		522221E722022DAF00753E8B /* User+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 522221E522022DAF00753E8B /* User+CoreDataProperties.swift */; };
+		84E20D0E220A13C300693638 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E20D0D220A13C300693638 /* TableViewController.swift */; };
+		84E20D10220A13E000693638 /* Notes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E20D0F220A13E000693638 /* Notes.swift */; };
 		84F888BF220216CD00423127 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F888BE220216CD00423127 /* AppDelegate.swift */; };
 		84F888C1220216CD00423127 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F888C0220216CD00423127 /* ViewController.swift */; };
 		84F888C4220216CD00423127 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84F888C2220216CD00423127 /* Main.storyboard */; };
@@ -20,6 +22,8 @@
 		522221E222022C4700753E8B /* NotesApp.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = NotesApp.xcdatamodel; sourceTree = "<group>"; };
 		522221E422022DAF00753E8B /* User+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+CoreDataClass.swift"; sourceTree = "<group>"; };
 		522221E522022DAF00753E8B /* User+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		84E20D0D220A13C300693638 /* TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
+		84E20D0F220A13E000693638 /* Notes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notes.swift; sourceTree = "<group>"; };
 		84F888BB220216CD00423127 /* Notes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Notes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		84F888BE220216CD00423127 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		84F888C0220216CD00423127 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -66,6 +70,8 @@
 				84F888C5220216CE00423127 /* Assets.xcassets */,
 				84F888CA220216CE00423127 /* Info.plist */,
 				522221E122022C4700753E8B /* NotesApp.xcdatamodeld */,
+				84E20D0D220A13C300693638 /* TableViewController.swift */,
+				84E20D0F220A13E000693638 /* Notes.swift */,
 			);
 			path = Notes;
 			sourceTree = "<group>";
@@ -140,7 +146,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84E20D10220A13E000693638 /* Notes.swift in Sources */,
 				522221E322022C4700753E8B /* NotesApp.xcdatamodeld in Sources */,
+				84E20D0E220A13C300693638 /* TableViewController.swift in Sources */,
 				84F888C1220216CD00423127 /* ViewController.swift in Sources */,
 				522221E622022DAF00753E8B /* User+CoreDataClass.swift in Sources */,
 				522221E722022DAF00753E8B /* User+CoreDataProperties.swift in Sources */,
