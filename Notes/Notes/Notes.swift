@@ -8,7 +8,7 @@
 
 import Foundation
 
-var notesList: [Note] = [Note(0, "Купить хлеба", "Пару буханок")]
+var notesList: [Note] = [Note("Купить хлеба", "Купить хлеба", "11.02.19")]
 
 func addNote(item: Note) {
     notesList.append(item)
@@ -18,14 +18,13 @@ func removeNote(at index: Int) {
     notesList.remove(at: index)
 }
 
-class Note {
-    var identifier: Int = 0
+class Note: Decodable {
     var title: String
     var content: String
-    
-    init(_ identifier: Int, _ title: String, _ content: String) {
-        self.identifier = identifier
+    var date: String
+    init(_ title: String, _ content: String, _ date: String) {
         self.title = title
         self.content = content
+        self.date = date
     }
 }

@@ -35,11 +35,11 @@ class AddNoteViewController: UIViewController {
         if okayButton.title != "Done" {
             let title = titleLabel.text ?? ""
             let content = contentField.text ?? ""
-            notesList.append(Note(0, title, content))
+            notesList.append(Note(title, content, ""))
         } else {
             let title = titleLabel.text ?? ""
             let content = contentField.text ?? ""
-            notesList[identifier!] = Note(0, title, content)
+            notesList[identifier!] = Note(title, content, "")
         }
     }
 }
