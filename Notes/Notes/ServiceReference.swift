@@ -97,6 +97,10 @@ func sendDataToServer() {
         do {
             let json = try JSONSerialization.jsonObject(with: data, options: [])
             print(json)
+            let notesDataList = try JSONDecoder().decode(TransferPackage.self, from: data)
+            print(notesDataList.userId)
+            notesList = notesDataList.notes ?? [Note("Купить хлеба", "Купить хлеба", "11.02.19")]
+            
         } catch {
             print(error)
         }

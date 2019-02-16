@@ -21,10 +21,10 @@ func removeNote(at index: Int) {
 class Note: Decodable {
     var title: String
     var content: String
-    var date: String
-    init(_ title: String, _ content: String, _ date: String) {
+    var lastChange: String
+    init(_ title: String, _ content: String, _ lastChange: String) {
         self.title = title
         self.content = content
-        self.date = date
+        self.lastChange = lastChange
     }
 }
