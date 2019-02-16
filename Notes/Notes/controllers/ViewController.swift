@@ -10,28 +10,23 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    @IBOutlet weak var label1: UILabel!
     @IBOutlet weak var LogInEdit: UITextField!
     @IBOutlet weak var PasswordEdit: UITextField!
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        label1.text = ""
         getDataFromServer()
     }
 
-
-    @IBAction func LogInAct(_ sender: Any) {
-        if LogInEdit.text == "tom.dacenko@gmail.com" && PasswordEdit.text == "0000" {
-            label1.text = LogInEdit.text! + PasswordEdit.text!
-            LogInEdit.text = ""
-            PasswordEdit.text = ""
-            // to list
-        }
-        else {
-            label1.text = "WRONG"
-            // again
+    @IBAction func logInBtnOnClick(_ sender: Any) {
+        sendDataToServer()
+        if (LogInEdit.text == "Admin" && PasswordEdit.text == "1234") {
+            let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+            
+            let nextViewController = storyBoard.instantiateViewController(withIdentifier: "mainPageNavController") as! UINavigationController
+            self.present(nextViewController, animated:true, completion:nil)
         }
     }
+    
 }
 

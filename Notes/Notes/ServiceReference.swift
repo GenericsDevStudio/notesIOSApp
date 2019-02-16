@@ -44,13 +44,63 @@ func getDataFromServer() {
     }.resume()
 }
 
-
-class NotesList: Decodable {
-    var notes: [Note]
-    init(notes: [Note]) {
-        self.notes = notes
+func sendDataToServer() {
+    /*guard let url = URL(string: "http://vasylko.zzz.com.ua/index.php/api/fd") else {
+        return
     }
+    let parameters = "login=Vasyl&password=Kobevko"
+    var request = URLRequest(url: url)
+    request.httpMethod = "POST"
+    request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+    let httpBody = parameters.data(using: .utf8)
+    request.httpBody = httpBody
+    
+    let session = URLSession.shared
+    session.dataTask(with: request) { (data, response, error) in
+        if let response = response {
+            print(response)
+        }
+        guard let data = data else { return }
+        print("data: ")
+        print(data)
+        do {
+            let json = try JSONSerialization.jsonObject(with: data, options: [])
+            print(json)
+        } catch {
+            print(error)
+        }
+    }.resume()*/
+    
+    let url = URL(string: "http://vasylko.zzz.com.ua/index.php/api/fd")!
+    var request = URLRequest(url: url)
+    request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
+    request.httpMethod = "POST"
+    request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+    
+    let postString = "login=Vasyl&password=Kobevko"
+    request.httpBody = postString.data(using: .utf8)
+    
+    let task = URLSession.shared.dataTask(with: request) { data, response, error in
+        guard let data = data, error == nil else {                                                 // check for fundamental networking error
+            print(error)
+            return
+        }
+        
+        if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode != 200 {           // check for http errors
+            print("statusCode should be 200, but is \(httpStatus.statusCode)")
+            print(response)
+        }
+        
+        let responseString = String(data: data, encoding: .utf8)
+        print(responseString)
+        
+        do {
+            let json = try JSONSerialization.jsonObject(with: data, options: [])
+            print(json)
+        } catch {
+            print(error)
+        }
+    }
+    task.resume()
     
 }
-
-
