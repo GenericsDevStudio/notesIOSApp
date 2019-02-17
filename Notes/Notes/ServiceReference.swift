@@ -9,6 +9,7 @@
 import Foundation
 
 var lastTransfer: TransferPackage?
+var currentUser: User?
 /*var parsedNotesList: NotesList?
 
 func getDataFromServer() {
@@ -187,8 +188,8 @@ func SendSignUpQuery(_ login: String, _ password: String, completionHandler: @es
 
 
 
-func SendAddNoteQuery(_ id: String, _ title: String, _ content: String, completionHandler: @escaping (_ result: Bool) -> ()) {
-    
+func SendAddNoteQuery(_ id: Int, _ title: String, _ content: String, completionHandler: @escaping (_ result: Bool) -> ()) {
+    print("hello")
     let url = URL(string: "http://vasylko.zzz.com.ua/index.php/api/addnote")!
     var request = URLRequest(url: url)
     
@@ -220,7 +221,7 @@ func SendAddNoteQuery(_ id: String, _ title: String, _ content: String, completi
 
 
 
-func SendUpdateNoteQuery(_ login: String, _ password: String, completionHandler: @escaping (_ result: Bool) -> ()) {
+func SendUpdateNoteQuery(_ id: Int, _ title: String, _ content: String, completionHandler: @escaping (_ result: Bool) -> ()) {
     
     let url = URL(string: "http://vasylko.zzz.com.ua/index.php/api/adduser")!
     var request = URLRequest(url: url)
@@ -229,7 +230,7 @@ func SendUpdateNoteQuery(_ login: String, _ password: String, completionHandler:
     request.httpMethod = "POST"
     request.addValue("application/json", forHTTPHeaderField: "Content-Type")
     
-    let postString = "login=\(login)&password=\(password)"
+    let postString = "userid=\(id)&title=\(title)&content=\(content)"
     request.httpBody = postString.data(using: .utf8)
     
     let task = URLSession.shared.dataTask(with: request) { data, response, error in
@@ -250,6 +251,40 @@ func SendUpdateNoteQuery(_ login: String, _ password: String, completionHandler:
     task.resume()
     
 }
+
+
+
+func SendDeleteNoteQuery(_ id: Int, completionHandler: @escaping (_ result: Bool) -> ()) {
+    
+    let url = URL(string: "http://vasylko.zzz.com.ua/index.php/api/dellnote")!
+    var request = URLRequest(url: url)
+    
+    request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
+    request.httpMethod = "POST"
+    request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+    
+    let postString = "login=\(id)"
+    request.httpBody = postString.data(using: .utf8)
+    
+    let task = URLSession.shared.dataTask(with: request) { data, response, error in
+        guard let data = data, error == nil else {                                                 // check for fundamental networking error
+            print(error as Any)
+            return
+        }
+        
+        if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode != 200 {           // check for http errors
+            print("statusCode should be 200, but is \(httpStatus.statusCode)")
+            print(response as Any)
+        } else {
+            let responseString = String(data: data, encoding: .utf8)
+            print(responseString as Any)
+            completionHandler(true)
+        }
+    }
+    task.resume()
+    
+}
+
 
 
 

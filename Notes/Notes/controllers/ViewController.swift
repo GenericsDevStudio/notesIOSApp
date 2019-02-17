@@ -22,6 +22,7 @@ class ViewController: UIViewController {
         let password = PasswordEdit.text
         SendAuthQuery(login!, password!) { result in
             print(result.userId)
+            currentUser = User(Int(result.userId)!, login!, password!)
             if result.userId != "0" {
                 DispatchQueue.main.async {
                     self.logInApp()

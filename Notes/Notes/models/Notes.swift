@@ -12,10 +12,19 @@ var notesList: [Note] = [Note("Купить хлеба", "Купить хлеб�
 
 func addNote(item: Note) {
     notesList.append(item)
+    SendAddNoteQuery((currentUser?.id)!, item.title, item.content) { result in print("Success")}
 }
 
 func removeNote(at index: Int) {
     notesList.remove(at: index)
+    //SendDeleteNoteQuery(0) { result in print("Success") }
+}
+
+func updateNote(_ identifier: Int, _ title: String, _ content: String) {
+    notesList[identifier].title = title
+    notesList[identifier].content = content
+    //let id = notesList[identifier].id
+    //SendUpdateNoteQuery(id, title, content) { result in print("Success")}
 }
 
 class Note: Decodable {

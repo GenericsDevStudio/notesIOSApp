@@ -294,7 +294,7 @@
                                 <segue destination="0Kp-BI-2Lh" kind="presentation" id="SsP-kX-54V"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Item2" id="maC-dp-78U"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="compose" id="maC-dp-78U"/>
                     </navigationItem>
                     <connections>
                         <outlet property="contentField" destination="0Bu-te-U5P" id="BUk-qE-g68"/>
@@ -346,6 +346,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
+        <segue reference="SsP-kX-54V"/>
         <segue reference="78L-GU-a6R"/>
     </inferredMetricsTieBreakers>
 </document>
