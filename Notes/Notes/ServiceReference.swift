@@ -143,7 +143,7 @@ func SendAuthQuery(_ login: String, _ password: String, completionHandler: @esca
             let json = try JSONSerialization.jsonObject(with: data, options: [])
             print(json)
             let notesDataList = try JSONDecoder().decode(TransferPackage.self, from: data)
-            notesList = notesDataList.notes ?? [Note("Купить хлеба", "Купить хлеба", "11.02.19")]
+            notesList = notesDataList.notes ?? [Note("0", "Купить хлеба", "Купить хлеба", "11.02.19")]
             completionHandler(notesDataList)
         } catch {
             print(error)
@@ -221,16 +221,16 @@ func SendAddNoteQuery(_ id: Int, _ title: String, _ content: String, completionH
 
 
 
-func SendUpdateNoteQuery(_ id: Int, _ title: String, _ content: String, completionHandler: @escaping (_ result: Bool) -> ()) {
+func SendUpdateNoteQuery(_ id: String, _ title: String, _ content: String, completionHandler: @escaping (_ result: Bool) -> ()) {
     
-    let url = URL(string: "http://vasylko.zzz.com.ua/index.php/api/adduser")!
+    let url = URL(string: "http://vasylko.zzz.com.ua/index.php/api/editnote")!
     var request = URLRequest(url: url)
     
     request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
     request.httpMethod = "POST"
     request.addValue("application/json", forHTTPHeaderField: "Content-Type")
     
-    let postString = "userid=\(id)&title=\(title)&content=\(content)"
+    let postString = "noteid=\(id)&title=\(title)&content=\(content)"
     request.httpBody = postString.data(using: .utf8)
     
     let task = URLSession.shared.dataTask(with: request) { data, response, error in
@@ -254,7 +254,7 @@ func SendUpdateNoteQuery(_ id: Int, _ title: String, _ content: String, completi
 
 
 
-func SendDeleteNoteQuery(_ id: Int, completionHandler: @escaping (_ result: Bool) -> ()) {
+func SendDeleteNoteQuery(_ id: String, completionHandler: @escaping (_ result: Bool) -> ()) {
     
     let url = URL(string: "http://vasylko.zzz.com.ua/index.php/api/dellnote")!
     var request = URLRequest(url: url)
@@ -263,7 +263,7 @@ func SendDeleteNoteQuery(_ id: Int, completionHandler: @escaping (_ result: Bool
     request.httpMethod = "POST"
     request.addValue("application/json", forHTTPHeaderField: "Content-Type")
     
-    let postString = "login=\(id)"
+    let postString = "noteid=\(id)"
     request.httpBody = postString.data(using: .utf8)
     
     let task = URLSession.shared.dataTask(with: request) { data, response, error in
