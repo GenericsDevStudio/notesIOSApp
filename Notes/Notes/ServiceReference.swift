@@ -8,7 +8,8 @@
 
 import Foundation
 
-var parsedNotesList: NotesList?
+var lastTransfer: TransferPackage?
+/*var parsedNotesList: NotesList?
 
 func getDataFromServer() {
     guard let url = URL(string: "http://www.alonesecurity.xyz/NotesServer/") else {
@@ -42,7 +43,7 @@ func getDataFromServer() {
         }
         
     }.resume()
-}
+}*/
 
 func sendDataToServer() {
     /*guard let url = URL(string: "http://vasylko.zzz.com.ua/index.php/api/fd") else {
@@ -71,7 +72,7 @@ func sendDataToServer() {
         }
     }.resume()*/
     
-    let url = URL(string: "http://vasylko.zzz.com.ua/index.php/api/fd")!
+    /*let url = URL(string: "http://vasylko.zzz.com.ua/index.php/api/fd")!
     var request = URLRequest(url: url)
     request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
     request.httpMethod = "POST"
@@ -105,6 +106,153 @@ func sendDataToServer() {
             print(error)
         }
     }
+ task.resume()*/
+    
+}
+
+func SendAuthQuery(_ login: String, _ password: String, completionHandler: @escaping (_ result: TransferPackage) -> ()) {
+    
+    print(login)
+    print(password)
+    let url = URL(string: "http://vasylko.zzz.com.ua/index.php/api/fd")!
+    var request = URLRequest(url: url)
+    
+    request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
+    request.httpMethod = "POST"
+    request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+    
+    let postString = "login=\(login)&password=\(password)"
+    request.httpBody = postString.data(using: .utf8)
+    
+    let task = URLSession.shared.dataTask(with: request) { data, response, error in
+        guard let data = data, error == nil else {                                                 // check for fundamental networking error
+            print(error as Any)
+            return
+        }
+        
+        if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode != 200 {           // check for http errors
+            print("statusCode should be 200, but is \(httpStatus.statusCode)")
+            print(response as Any)
+        }
+        
+        let responseString = String(data: data, encoding: .utf8)
+        print(responseString as Any)
+        
+        do {
+            let json = try JSONSerialization.jsonObject(with: data, options: [])
+            print(json)
+            let notesDataList = try JSONDecoder().decode(TransferPackage.self, from: data)
+            notesList = notesDataList.notes ?? [Note("Купить хлеба", "Купить хлеба", "11.02.19")]
+            completionHandler(notesDataList)
+        } catch {
+            print(error)
+        }
+    }
     task.resume()
     
 }
+
+
+
+func SendSignUpQuery(_ login: String, _ password: String, completionHandler: @escaping (_ result: Bool) -> ()) {
+    
+    let url = URL(string: "http://vasylko.zzz.com.ua/index.php/api/adduser")!
+    var request = URLRequest(url: url)
+    
+    request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
+    request.httpMethod = "POST"
+    request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+    
+    let postString = "login=\(login)&password=\(password)"
+    request.httpBody = postString.data(using: .utf8)
+    
+    let task = URLSession.shared.dataTask(with: request) { data, response, error in
+        guard let data = data, error == nil else {                                                 // check for fundamental networking error
+            print(error as Any)
+            return
+        }
+        
+        if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode != 200 {           // check for http errors
+            print("statusCode should be 200, but is \(httpStatus.statusCode)")
+            print(response as Any)
+        } else {
+            let responseString = String(data: data, encoding: .utf8)
+            print(responseString as Any)
+            completionHandler(true)
+        }
+    }
+    task.resume()
+    
+}
+
+
+
+func SendAddNoteQuery(_ id: String, _ title: String, _ content: String, completionHandler: @escaping (_ result: Bool) -> ()) {
+    
+    let url = URL(string: "http://vasylko.zzz.com.ua/index.php/api/addnote")!
+    var request = URLRequest(url: url)
+    
+    request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
+    request.httpMethod = "POST"
+    request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+    
+    let postString = "userid=\(id)&title=\(title)&content=\(content)"
+    request.httpBody = postString.data(using: .utf8)
+    
+    let task = URLSession.shared.dataTask(with: request) { data, response, error in
+        guard let data = data, error == nil else {                                                 // check for fundamental networking error
+            print(error as Any)
+            return
+        }
+        
+        if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode != 200 {           // check for http errors
+            print("statusCode should be 200, but is \(httpStatus.statusCode)")
+            print(response as Any)
+        } else {
+            let responseString = String(data: data, encoding: .utf8)
+            print(responseString as Any)
+            completionHandler(true)
+        }
+    }
+    task.resume()
+    
+}
+
+
+
+func SendUpdateNoteQuery(_ login: String, _ password: String, completionHandler: @escaping (_ result: Bool) -> ()) {
+    
+    let url = URL(string: "http://vasylko.zzz.com.ua/index.php/api/adduser")!
+    var request = URLRequest(url: url)
+    
+    request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
+    request.httpMethod = "POST"
+    request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+    
+    let postString = "login=\(login)&password=\(password)"
+    request.httpBody = postString.data(using: .utf8)
+    
+    let task = URLSession.shared.dataTask(with: request) { data, response, error in
+        guard let data = data, error == nil else {                                                 // check for fundamental networking error
+            print(error as Any)
+            return
+        }
+        
+        if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode != 200 {           // check for http errors
+            print("statusCode should be 200, but is \(httpStatus.statusCode)")
+            print(response as Any)
+        } else {
+            let responseString = String(data: data, encoding: .utf8)
+            print(responseString as Any)
+            completionHandler(true)
+        }
+    }
+    task.resume()
+    
+}
+
+
+
+
+
+

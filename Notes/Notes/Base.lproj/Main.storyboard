@@ -69,7 +69,7 @@
         <!--Sign Up-->
         <scene sceneID="zae-In-fCa">
             <objects>
-                <viewController title="Sign Up" id="iCH-IG-nBO" sceneMemberID="viewController">
+                <viewController title="Sign Up" id="iCH-IG-nBO" customClass="SignUpViewController" customModule="Notes" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="eFt-WU-GqY">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -92,7 +92,7 @@
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES" smartDashesType="yes" textContentType="password"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password confirmation" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yAS-aV-yI9">
-                                <rect key="frame" x="87" y="254" width="200" height="30"/>
+                                <rect key="frame" x="87" y="251" width="200" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -105,13 +105,19 @@
                                 <color key="tintColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="Sign Up"/>
                                 <connections>
-                                    <segue destination="0Kp-BI-2Lh" kind="presentation" id="Ks2-Gj-H2b"/>
+                                    <action selector="onSignUpBtnClick:" destination="iCH-IG-nBO" eventType="touchUpInside" id="LIL-ub-fHq"/>
+                                    <action selector="onSignUpButtonClick:" destination="z0l-bS-Cce" eventType="touchUpInside" id="j7M-bm-sQT"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="EXO-Pa-JmF"/>
                     </view>
+                    <connections>
+                        <outlet property="loginEditText" destination="cGU-jV-JbR" id="2aG-Rl-ims"/>
+                        <outlet property="passwordConfirmEditText" destination="yAS-aV-yI9" id="wDo-gt-wwf"/>
+                        <outlet property="passwordEditText" destination="2iJ-Y1-iQ7" id="Z2K-Gl-gYt"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Wxt-OI-69B" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="z0l-bS-Cce" userLabel="Exit" sceneMemberID="exit"/>
@@ -340,8 +346,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="vmJ-Rq-zuv"/>
-        <segue reference="SsP-kX-54V"/>
         <segue reference="78L-GU-a6R"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -12,21 +12,28 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var LogInEdit: UITextField!
     @IBOutlet weak var PasswordEdit: UITextField!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-        //getDataFromServer()
     }
 
     @IBAction func logInBtnOnClick(_ sender: Any) {
-        sendDataToServer()
-        if (LogInEdit.text == "Admin" && PasswordEdit.text == "1234") {
-            let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-            
-            let nextViewController = storyBoard.instantiateViewController(withIdentifier: "mainPageNavController") as! UINavigationController
-            self.present(nextViewController, animated:true, completion:nil)
+        let login = LogInEdit.text
+        let password = PasswordEdit.text
+        SendAuthQuery(login!, password!) { result in
+            print(result.userId)
+            if result.userId != "0" {
+                DispatchQueue.main.async {
+                    self.logInApp()
+                }
+            }
         }
     }
     
+    func logInApp() {
+        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+        let nextViewController = storyBoard.instantiateViewController(withIdentifier: "mainPageNavController") as! UINavigationController
+        self.present(nextViewController, animated:true, completion:nil)
+    }
+    
 }
-

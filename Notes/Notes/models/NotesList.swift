@@ -7,10 +7,3 @@
 //
 
 import Foundation
-
-class NotesList: Decodable {
-    var notes: [Note]
-    init(notes: [Note]) {
-        self.notes = notes
-    }
-}
